@@ -15,7 +15,7 @@ function Form() {
     event.preventDefault();
 
     axios
-      .post("pi3-bti-22-back.vercel.app/api/v1/instituicoes", formData, {
+      .post("pi3-bti-22-back.vercel.app:3000/api/v1/instituicoes", formData, {
         headers: {
           "Content-Type": "application/json",
         },
