@@ -1,5 +1,6 @@
 import Container from "../../components/Container";
 import Footer from "../../components/Footer";
+import Form from "../../components/Form";
 import Header from "../../components/Header";
 
 function Home() {
@@ -7,9 +8,7 @@ function Home() {
     <>
       <Header />
       <Container>
-        <div>
-          <Input type="text" />
-        </div>
+        <Form />
       </Container>
       <Footer />
     </>
