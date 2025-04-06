@@ -7,7 +7,7 @@ function Map() {
   const [position, setPosition] = useState([-23.551, -46.633]); // Posição inicial
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/instituicoes").then((response) => {
+    axios.get("pi3-bti-22-back.vercel.app/api/v1/instituicoes").then((response) => {
       setInstituicoes(response.data);
     });
   }, []);
