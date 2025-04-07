@@ -15,11 +15,15 @@ function Form() {
     event.preventDefault();
 
     axios
-      .post("pi3-bti-22-back.vercel.app:3000/api/v1/instituicoes", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "pi3-bti-22-back-6fsaemdk3-rafaels-projects-06fab5f1.vercel.app/api/v1/instituicoes",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         alert("Dados enviados com sucesso:", response.data);
 
