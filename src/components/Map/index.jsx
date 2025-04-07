@@ -9,7 +9,7 @@ function Map() {
   useEffect(() => {
     axios
       .get(
-        "pi3-bti-22-back-6fsaemdk3-rafaels-projects-06fab5f1.vercel.app/api/v1/instituicoes"
+        "https://pi3-bti-22-back.onrender.com/api/v1/instituicoes"
       )
       .then((response) => {
         setInstituicoes(response.data);
