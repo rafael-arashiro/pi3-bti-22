@@ -2,6 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
+import { useMap } from 'react-leaflet';
+
+function ChangeView({ center }) {
+  const map = useMap();
+  map.setView(center, map.getZoom());
+  return null;
+}
+
 function Map() {
   const [instituicoes, setInstituicoes] = useState([]);
   const [position, setPosition] = useState([-23.551, -46.633]); // Posição inicial
@@ -9,7 +17,7 @@ function Map() {
   useEffect(() => {
     axios
       .get(
-        "https://pi3-bti-22-back.onrender.com/api/v1/instituicoes"
+        "http://localhost:3000/api/v1/instituicoes"
       )
       .then((response) => {
         setInstituicoes(response.data);
@@ -25,6 +33,7 @@ function Map() {
       <div>
         {/* Mapa */}
         <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
+        <ChangeView center={position} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -51,7 +60,7 @@ function Map() {
               <div>
                 <button
                   onClick={() =>
-                    mudarMapa(instituicao.localx, instituicao.localy)
+                    mudarMapa(instituicao.localy, instituicao.localx)
                   }
                 >
                   Mostrar no mapa

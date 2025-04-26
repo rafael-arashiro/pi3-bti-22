@@ -16,7 +16,7 @@ function Form() {
 
     axios
       .post(
-        "https://pi3-bti-22-back.onrender.com/api/v1/instituicoes",
+        "http://localhost:3000/api/v1/instituicoes",
         formData,
         {
           headers: {
