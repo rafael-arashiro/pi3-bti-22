@@ -1,17 +1,23 @@
-import { Link } from "react-router-dom";
-import styles from "./Header.module.css";
+import { Link, useLocation } from "react-router-dom";
+import styles from './Header.module.css';
 
 function Header() {
+  const location = useLocation(); // pega a URL atual
+
   return (
-    <>
-      <nav>
-        <header className={styles.header}>
-          <span>Mapeamento Colaborativo de Instituições Sociais</span>
-        </header>
-        <Link to="/">Home</Link>
-        <Link to="/pagemap">Mapa</Link>
+    <header className={styles.header}>
+      <h1 className={styles.headerTitle}>
+        Mapeamento Colaborativo de Instituições Sociais
+      </h1>
+      <nav className={styles.navLinks}>
+        {location.pathname === "/" && (
+          <Link to="/pagemap">Mapa</Link>
+        )}
+        {location.pathname === "/pagemap" && (
+          <Link to="/">Home</Link>
+        )}
       </nav>
-    </>
+    </header>
   );
 }
 

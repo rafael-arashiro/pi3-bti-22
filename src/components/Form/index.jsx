@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import styles from './Form.module.css';
+import { FaBuilding, FaMapMarkerAlt, FaMapSigns } from 'react-icons/fa'; // Ícones!
 
 function Form() {
   const categories = ["Cultura", "Educação", "Esporte", "Saúde"];
@@ -11,28 +13,26 @@ function Form() {
     servico: "-",
   });
 
+  const [message, setMessage] = useState(null);
+
   function handleSubmit(event) {
     event.preventDefault();
 
     axios
-      .post(
-        "http://localhost:3000/api/v1/instituicoes",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post("http://localhost:3000/api/v1/instituicoes", formData, {
+        headers: { "Content-Type": "application/json" },
+      })
       .then((response) => {
-        alert("Dados enviados com sucesso:", response.data);
-
+        setMessage({ type: 'success', text: "Instituição cadastrada com sucesso!" });
         setFormData({
           nome: "",
           localx: "",
           localy: "",
           servico: "-",
         });
+      })
+      .catch(() => {
+        setMessage({ type: 'error', text: "Erro ao cadastrar instituição!" });
       });
   }
 
@@ -45,61 +45,80 @@ function Form() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome da Instituição</label>
-          <input
-            type="text"
-            name="nome"
-            placeholder="Digite o nome da instituição"
-            required
-            value={formData.nome}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Local X</label>
-          <input
-            type="text"
-            name="localx"
-            placeholder="Digite a coordenada x da instituição"
-            required
-            value={formData.localx}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Local Y</label>
-          <input
-            type="text"
-            name="localy"
-            placeholder="Digite a coordenada y da instituição"
-            required
-            value={formData.localy}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Tipo de serviço</label>
-          <select
-            name="servico"
-            value={formData.servico}
-            onChange={handleChange}
-            required
-          >
-            <option value="-">Selecione um serviço</option>
-            {categories.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <button type="submit">Cadastrar</button>
-        </div>
-      </form>
+    <section className={styles.pageSection}>
+      <div className={styles.formContainer}>
+        
+      <img 
+  src="/assets/undraw_sharing-knowledge_pu0e.svg" 
+  alt="Compartilhando Conhecimento" 
+  className={styles.illustration}
+/>
+
+
+
+
+        <h2 className={styles.formTitle}>Cadastrar Nova Instituição</h2>
+
+        {message && (
+          <div className={`${styles.message} ${styles[message.type]}`}>
+            {message.text}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.formGroup}>
+            <label><FaBuilding /> Nome da Instituição</label>
+            <input
+              type="text"
+              name="nome"
+              placeholder="Digite o nome da instituição"
+              required
+              value={formData.nome}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label><FaMapMarkerAlt /> Local X (Longitude)</label>
+            <input
+              type="text"
+              name="localx"
+              placeholder="Digite a coordenada X"
+              required
+              value={formData.localx}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label><FaMapMarkerAlt /> Local Y (Latitude)</label>
+            <input
+              type="text"
+              name="localy"
+              placeholder="Digite a coordenada Y"
+              required
+              value={formData.localy}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label><FaMapSigns /> Tipo de serviço</label>
+            <select
+              name="servico"
+              value={formData.servico}
+              onChange={handleChange}
+              required
+            >
+              <option value="-">Selecione um serviço</option>
+              {categories.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
+            </select>
+          </div>
+
+          <button type="submit" className={styles.cadastrarButton}>
+            Cadastrar
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
