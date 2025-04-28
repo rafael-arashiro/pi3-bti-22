@@ -23,7 +23,9 @@ function Map() {
   }, []);
 
   function mudarMapa(lat, lng) {
-    setPosition([lat, lng]);
+    const latNum = parseFloat(lat)
+    const lngNum = parseFloat(lng)
+    setPosition([latNum, lngNum]);
   }
 
   return (
@@ -36,7 +38,6 @@ function Map() {
           scrollWheelZoom={true}
           className={styles.mapContainer}
         >
-          <ChangeView center={position} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -57,7 +58,7 @@ function Map() {
             <div>Localização: ({instituicao.localx}, {instituicao.localy})</div>
             <div>Serviço: {instituicao.servico}</div>
             <button
-              onClick={() => mudarMapa(instituicao.localy, instituicao.localx)}
+              onClick={() => mudarMapa(instituicao.localx, instituicao.localy)}
               className={styles.mostrarMapaButton}
             >
               Mostrar no mapa

@@ -22,7 +22,7 @@ function Form() {
       .post("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes", formData, {
         headers: { "Content-Type": "application/json" },
       })
-      .then((response) => {
+      .then(() => {
         setMessage({ type: 'success', text: "Instituição cadastrada com sucesso!" });
         setFormData({
           nome: "",
