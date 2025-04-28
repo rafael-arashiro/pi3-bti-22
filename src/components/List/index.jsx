@@ -5,7 +5,7 @@ function List() {
   const [instituicoes, setInstituicoes] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/instituicoes").then((response) => {
+    axios.get("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes").then((response) => {
       setInstituicoes(response.data);
     });
   }, []);
