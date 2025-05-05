@@ -16,7 +16,7 @@ function Map() {
 
   useEffect(() => {
     axios
-      .get("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
+      .get("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
       .then((response) => {
         setInstituicoes(response.data);
       });
@@ -26,6 +26,28 @@ function Map() {
     const latNum = parseFloat(lat)
     const lngNum = parseFloat(lng)
     setPosition([latNum, lngNum]);
+  }
+
+  const [message, setMessage] = useState(null);
+
+  function handleSubmit(id) {
+    
+    if (!window.confirm("Tem certeza que deseja apagar esta instituição?")) {
+      return;
+    }
+
+    axios
+      .delete(`http://pi3-bti-22-back.onrender.com/api/v1/instituicoes/${id}`)
+      .then(() => {
+        setMessage({ type: 'success', text: "Instituição apagada com sucesso!" });
+        axios.get("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
+        .then((response) => {
+          setInstituicoes(response.data);
+        });
+      })
+      .catch(() => {
+        setMessage({ type: 'error', text: "Erro ao apagar instituição!" });
+      });
   }
 
   return (
@@ -51,6 +73,12 @@ function Map() {
       {/* Lista de Instituições */}
       <h2 className={styles.pageTitle}>Instituições Cadastradas</h2>
 
+      {message && (
+        <div className={`${styles.message} ${styles[message.type]}`}>
+          {message.text}
+        </div>
+      )}
+
       <ul className={styles.instituicaoList}>
         {instituicoes.map((instituicao) => (
           <li key={instituicao.id} className={styles.instituicaoItem}>
@@ -62,6 +90,18 @@ function Map() {
               className={styles.mostrarMapaButton}
             >
               Mostrar no mapa
+            </button>
+            <button
+              onClick={() => mudarMapa(instituicao.localx, instituicao.localy)}
+              className={styles.mostrarMapaButton}
+            >
+              Atualizar
+            </button>
+            <button
+              onClick={() => handleSubmit(instituicao.id)}
+              className={styles.mostrarMapaButton}
+            >
+              Apagar
             </button>
           </li>
         ))}

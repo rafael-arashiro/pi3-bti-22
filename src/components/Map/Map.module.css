@@ -64,10 +64,11 @@
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.3s;
+    margin-left: 10px;
   }
   
   .mostrarMapaButton:hover {
-    background-color: #4338ca; 
+    background-color: #4338ca;
   }
 
   .instituicaoItem div {

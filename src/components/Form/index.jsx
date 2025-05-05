@@ -8,8 +8,9 @@ function Form() {
 
   const [formData, setFormData] = useState({
     nome: "",
-    localx: "",
-    localy: "",
+    endereco: "",
+    cidade: "",
+    estado: "",
     servico: "-",
   });
 
@@ -19,15 +20,16 @@ function Form() {
     event.preventDefault();
 
     axios
-      .post("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes", formData, {
+      .post("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes", formData, {
         headers: { "Content-Type": "application/json" },
       })
       .then(() => {
         setMessage({ type: 'success', text: "Instituição cadastrada com sucesso!" });
         setFormData({
           nome: "",
-          localx: "",
-          localy: "",
+          endereco: "",
+          cidade: "",
+          estado: "",
           servico: "-",
         });
       })
@@ -54,9 +56,6 @@ function Form() {
   className={styles.illustration}
 />
 
-
-
-
         <h2 className={styles.formTitle}>Cadastrar Nova Instituição</h2>
 
         {message && (
@@ -78,24 +77,35 @@ function Form() {
             />
           </div>
           <div className={styles.formGroup}>
-            <label><FaMapMarkerAlt /> Local X (Longitude)</label>
+            <label><FaMapMarkerAlt /> Endereço</label>
             <input
               type="text"
-              name="localx"
-              placeholder="Digite a coordenada X"
+              name="endereco"
+              placeholder="Digite o endereço"
               required
-              value={formData.localx}
+              value={formData.endereco}
               onChange={handleChange}
             />
           </div>
           <div className={styles.formGroup}>
-            <label><FaMapMarkerAlt /> Local Y (Latitude)</label>
+            <label><FaMapMarkerAlt /> Cidade</label>
             <input
               type="text"
-              name="localy"
-              placeholder="Digite a coordenada Y"
+              name="cidade"
+              placeholder="Digite a cidade"
               required
-              value={formData.localy}
+              value={formData.cidade}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label><FaMapMarkerAlt /> Estado</label>
+            <input
+              type="text"
+              name="estado"
+              placeholder="Digite o estado"
+              required
+              value={formData.estado}
               onChange={handleChange}
             />
           </div>

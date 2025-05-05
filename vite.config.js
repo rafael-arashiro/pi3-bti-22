@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // back-end
+        target: 'http://pi3-bti-22-back.onrender.com', // back-end
         changeOrigin: true,
         secure: false,
       },
