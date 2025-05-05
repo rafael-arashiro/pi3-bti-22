@@ -16,7 +16,7 @@ function Map() {
 
   useEffect(() => {
     axios
-      .get("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
+      .get("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
       .then((response) => {
         setInstituicoes(response.data);
       });
@@ -37,10 +37,10 @@ function Map() {
     }
 
     axios
-      .delete(`http://pi3-bti-22-back.onrender.com/api/v1/instituicoes/${id}`)
+      .delete(`https://pi3-bti-22-back.onrender.com/api/v1/instituicoes/${id}`)
       .then(() => {
         setMessage({ type: 'success', text: "Instituição apagada com sucesso!" });
-        axios.get("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
+        axios.get("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes")
         .then((response) => {
           setInstituicoes(response.data);
         });

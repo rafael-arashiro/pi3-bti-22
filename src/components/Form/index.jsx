@@ -20,7 +20,7 @@ function Form() {
     event.preventDefault();
 
     axios
-      .post("http://pi3-bti-22-back.onrender.com/api/v1/instituicoes", formData, {
+      .post("https://pi3-bti-22-back.onrender.com/api/v1/instituicoes", formData, {
         headers: { "Content-Type": "application/json" },
       })
       .then(() => {
