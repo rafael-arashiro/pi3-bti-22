@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 import styles from './Map.module.css';
+import { useNavigate } from "react-router-dom";
 
 function ChangeView({ center }) {
   const map = useMap();
@@ -13,6 +14,7 @@ function ChangeView({ center }) {
 function Map() {
   const [instituicoes, setInstituicoes] = useState([]);
   const [position, setPosition] = useState([-23.551, -46.633]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -92,7 +94,7 @@ function Map() {
               Mostrar no mapa
             </button>
             <button
-              onClick={() => mudarMapa(instituicao.localx, instituicao.localy)}
+              onClick={() => navigate(`/update/${instituicao.id}`)}
               className={styles.mostrarMapaButton}
             >
               Atualizar

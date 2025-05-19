@@ -16,6 +16,9 @@ function Header() {
         {location.pathname === "/pagemap" && (
           <Link to="/">Home</Link>
         )}
+        {location.pathname.startsWith("/update/") && (
+          <Link to="/pagemap">Mapa</Link>
+        )}
       </nav>
     </header>
   );
